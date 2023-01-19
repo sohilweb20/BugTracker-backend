@@ -2,15 +2,15 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
-
-const { connection } = require("./config/db");
-const { Authmodel } = require("./Model/Auth.model");
-
 require("dotenv").config();
 const app = express();
 
 app.use(express.json());
 
+const { connection } = require("./config/db");
+const { Authmodel } = require("./Model/Auth.model");
+const { userRouter } = require("./Route/Dash.Route");
+//for use of frontend
 app.use(
   cors({
     origin: "*",
@@ -78,6 +78,8 @@ app.post("/login", async (req, res) => {
     res.send("Something went wrong, please try again later");
   }
 });
+
+app.use("/bugsone", userRouter);
 
 app.listen(process.env.port, async () => {
   try {
