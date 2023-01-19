@@ -1,7 +1,7 @@
 const express = require("express");
 
 const userRouter = express.Router();
-const { Usermodel } = require("../Model/Dash.Model");
+const { Usermodel } = require("");
 
 userRouter.get("/", async (req, res) => {
   try {
@@ -18,16 +18,6 @@ userRouter.post("/create", async (req, res) => {
     const new_data = new Usermodel(payload);
     await new_data.save();
     res.send({ MSG: "User Data Posted Successfully" });
-  } catch (err) {
-    console.log({ ERR: "Something went wrong in posting the Data" });
-  }
-});
-
-userRouter.delete("/delete/:userID", async (req, res) => {
-  const userID = req.params.userID;
-  try {
-    await Usermodel.findByIdAndDelete({ _id: userID });
-    res.send({ MSG: "User Data Deleted Successfully" });
   } catch (err) {
     console.log({ ERR: "Something went wrong in posting the Data" });
   }
